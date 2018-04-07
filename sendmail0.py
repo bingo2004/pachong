@@ -8,7 +8,7 @@ def sendMail(body):
     smtp_server = 'smtp.163.com'
     from_mail = 'zhangbinbin2004@163.com'
     mail_pass = environ.get('MAIL_PASSWORD')
-    to_mail = ['398778369@qq.com']
+    to_mail = ['398778369@qq.com','zhangbinbin2004@163.com']
     cc_mail = []
     from_name = 'bingo'
     subject = u'测试'.encode('utf-8')
