@@ -35,7 +35,7 @@ def downpic(url,name,n):
 
     try:
         pic=request.urlopen(req)
-        fp=open(name+str(n)+'.jpg','wb')
+        fp=open('pic/'+name+str(n)+'.jpg','wb')
         fp.write(pic.read())
         fp.close()
         print('status:',pic.status,pic.reason)
@@ -59,7 +59,7 @@ for eachline in ftxt:
         sleep(randint(0,2))
     print("read line: %s"%line)
     if re.match('http',line):
-        if num<2:  #每个页面不超过30张
+        if num<60:  #每个页面不超过30张
             downpic(line,name,num)
         num+=1
         print("download-yes=%s : download-no=%s\n\n\n "%(download_num[0],download_num[1]))

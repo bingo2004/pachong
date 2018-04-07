@@ -34,8 +34,13 @@ def sendMail(body, attachment):
         encoders.encode_base64(mime)
         msg.attach(mime)
     try:
+        s = smtplib.SMTP_SSL()
+        s.connect(smtp_server, '465')
+        '''
+        #smtplib.SMTP and smtplib.SMTP_SSL for vpn
         s = smtplib.SMTP()
         s.connect(smtp_server, '25')
+        '''
         s.login(from_mail,mail_pass)
         s.sendmail(from_mail, to_mail, msg.as_string())
         s.quit()
