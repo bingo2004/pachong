@@ -13,7 +13,7 @@ while 1:
     print('today is %s\n'%today)
     w=ctime().split(' ')[0] #星期几
 
-    if t.tm_hour==23:
+    if t.tm_hour==6:
         fp = open('jrtt.txt','w')
         fp.write('*'*25+'\n'+ctime()+'\n'+'*'*25+'\n')
         fp.close()
@@ -21,8 +21,18 @@ while 1:
         dqd()
         qiubai()
         yueguang()
+        sendmail.sendMail('正文','jrtt.txt')
+        print("邮件已发送！\t Sleeping......")
+        sleep(30000)
+    if t.tm_hour==16:
+        fp = open('jrtt.txt','w')
+        fp.write('*'*25+'\n'+ctime()+'\n'+'*'*25+'\n')
+        fp.close()
+        smth()
+        qiubai()
+        yueguang()
         daily()
         sendmail.sendMail('正文','jrtt.txt')
         print("邮件已发送！\t Sleeping......")
-        sleep(3600)
+        sleep(30000)
     sleep(1800)
