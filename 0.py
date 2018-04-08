@@ -1,5 +1,5 @@
 #coding:utf-8
-import sendmail
+import sendmail1
 from time import time,localtime,ctime,sleep
 from qiubai import qiubai
 from smth import smth
@@ -32,7 +32,7 @@ while 1:
         qiubai()
         yueguang()
         daily()
-        sendmail.sendMail('正文','jrtt.txt')
+        sendmail1.sendMail('正文','jrtt.txt')
         print("邮件已发送！\t Sleeping......")
         sleep(30000)
     sleep(1800)
