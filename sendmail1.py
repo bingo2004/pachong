@@ -31,11 +31,14 @@ def sendMail(body, attachment):
     f.close()
     msg.attach(MIMEText(body,'plain','utf-8'))
 
-    s = smtplib.SMTP_SSL()
-    s.connect(smtp_server, '465')
-    s.login(from_mail,mail_pass)
-    s.sendmail(from_mail, to_mail, msg.as_string())
-    s.quit()
+    try:
+        s = smtplib.SMTP_SSL()
+        s.connect(smtp_server, '465')
+        s.login(from_mail,mail_pass)
+        s.sendmail(from_mail, to_mail, msg.as_string())
+        s.quit()
+    except smtplib.SMTPException as e:
+        print("Error: %s"%e)
 
 if __name__ == '__main__':
     sendMail('测试邮件附件','jrtt.txt')
