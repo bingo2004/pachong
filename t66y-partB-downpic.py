@@ -3,7 +3,14 @@
 import re
 from urllib import request
 from time import sleep
-from random import randint 
+from random import randint
+
+import socket
+socket.setdefaulttimeout(30) #urllib.request的timeout
+
+goodint = [10,11,18,20,21,25,26,27,29,30,33,35,42,43,44,45,46,48,49,61,75,76,77,78,79,80,81,82,84,85,86,87,88,89,90,91,93,95,96]#手动分辨值得下载的图片
+good = [str(i) for i in goodint]
+print(good)
 
 download_num=[0,0]
 
@@ -55,11 +62,11 @@ num=1
 for eachline in ftxt:
     line=eachline.decode('utf-8').strip()
     ##每下载10张，sleep 3-5秒
-    if download_num[0]%10:
-        sleep(randint(0,2))
+#    if download_num[0]%10:
+#        sleep(randint(0,2))
     print("read line: %s"%line)
     if re.match('http',line):
-        if num<60:  #每个页面不超过30张
+        if name[:2] in good and num>6:  #每个页面不超过30张
             downpic(line,name,num)
         num+=1
         print("download-yes=%s : download-no=%s\n\n\n "%(download_num[0],download_num[1]))
