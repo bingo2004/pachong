@@ -7,13 +7,17 @@ from time import ctime
 def smth():
     url = 'https://m.newsmth.net'
     header = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36','Cookie': 'AspxAutoDetectCookieSupport=1',}
-    req = request.Request(url,None,header)
-    with request.urlopen(req) as f:
-        data = f.read()
-    data = data.decode('utf-8')
-#   print(data)
-    pattern = re.compile(u'<li>(\d{1,2})\|<a href="(.*?)">(.*?)\(<span',re.S)
-    items = re.findall(pattern,data)
+    try:
+        req = request.Request(url,None,header)
+        with request.urlopen(req) as f:
+            data = f.read()
+        data = data.decode('utf-8')
+    #   print(data)
+        pattern = re.compile(u'<li>(\d{1,2})\|<a href="(.*?)">(.*?)\(<span',re.S)
+        items = re.findall(pattern,data)
+    except Exception:
+        print("Error!")
+        return
 
 #    fp = open('smth-top10.txt','w')
     fp = open('jrtt.txt','a')
