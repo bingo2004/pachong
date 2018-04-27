@@ -7,11 +7,10 @@ from time import sleep
 from random import uniform
 import os
 
-def url_to_file(url_page):
+def url_to_file(url_page,num):
     req=request.Request(url_page)
     req.add_header('User-Agent',header2)
     data=request.urlopen(req).read().decode('gbk')
-#    print(data)
     pattern=re.compile('<title>(.*?\[\d+P\]).*?</title>')
     name=re.search(pattern,data)
     if name:
@@ -20,12 +19,12 @@ def url_to_file(url_page):
         return
         name='not got name'
     name=name.replace(' ','_')
-    os.system('mkdir %s'%name)
+    name = str(num)+'_'+name
     print("name = '%s'"%name)
     pattern=re.compile('http[s]?://[\w\./_-]+.jpg')
     url_pic=re.findall(pattern,data)
     for i,url in enumerate(url_pic):
-        os.system("aria2c -d ./%s %s"%(name,url))
+        os.system("aria2c -d ./pic/%s %s"%(name,url))
     return
 
 #新时代的我们
@@ -40,12 +39,9 @@ data = request.urlopen(req).read().decode('gbk')
 
 pattern=re.compile('<h3><a href="(.*?)"')
 urls=re.findall(pattern,data)
-urllist=[]
-for j in urls[5:]:
-    urllist.append('http://t66y.com/'+j)
-print("get %d url_pages"%len(urllist))
-
-url_pic=[]
-num=1
-for url_page in urllist[:]:
-    url_to_file(url_page)
+num = 0
+for each_url in urls[5:6]:#排除掉置顶帖
+    num += 1
+    each_url = 'http://t66y.com/'+each_url
+    url_to_file(each_url,num)
+print("get %d url_pages"%len(urls)-5)
