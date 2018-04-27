@@ -62,11 +62,12 @@ num=1
 for eachline in ftxt:
     line=eachline.decode('utf-8').strip()
     ##每下载10张，sleep 3-5秒
-#    if download_num[0]%10:
-#        sleep(randint(0,2))
+    if download_num[0]%10:
+        sleep(randint(0,2))
     print("read line: %s"%line)
     if re.match('http',line):
-        if name[:2] in good and num>6:  #每个页面不超过30张
+        if num>0:  #每个页面不超过30张
+#        if name[:2] in good and num>6:  #每个页面不超过30张
             downpic(line,name,num)
         num+=1
         print("download-yes=%s : download-no=%s\n\n\n "%(download_num[0],download_num[1]))
