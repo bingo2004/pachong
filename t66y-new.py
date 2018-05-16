@@ -41,7 +41,7 @@ data = request.urlopen(req).read().decode('gbk')
 pattern=re.compile('<h3><a href="(.*?)"')
 urls=re.findall(pattern,data)
 urllist=[]
-for j in urls[5:]:
+for j in urls[:5]:
     urllist.append('http://t66y.com/'+j)
 print("get %d url_pages"%len(urllist))
 
