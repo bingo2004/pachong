@@ -39,9 +39,12 @@ data = request.urlopen(req).read().decode('gbk')
 
 pattern=re.compile('<h3><a href="(.*?)"')
 urls=re.findall(pattern,data)
-num = 0
-for each_url in urls[5:6]:#排除掉置顶帖
-    num += 1
-    each_url = 'http://t66y.com/'+each_url
-    url_to_file(each_url,num)
-print("get %d url_pages"%len(urls)-5)
+urllist=[]
+for j in urls[:5]:#排除掉置顶帖
+    urllist.append('http://t66y.com/'+j)
+print("get %d url_pages"%len(urllist))
+
+url_pic=[]
+num=1
+for url_page in urllist[:]:
+    url_to_file(url_page)
